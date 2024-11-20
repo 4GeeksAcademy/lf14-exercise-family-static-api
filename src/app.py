@@ -30,12 +30,13 @@ def get_members():
     members = jackson_family.get_all_members()
     return jsonify(members), 200
 
-@app.route('/member/<int:member_id>', methods=['GET'])
+@app.route('/member/<string:member_id>', methods=['GET'])
 def get_member(member_id):
     member = jackson_family.get_member(member_id)
     if member is None:
         return jsonify({'msg': 'Not found'}), 404
     return jsonify(member), 200
+
 
 @app.route('/member', methods=['POST'])
 def add_member():
@@ -49,7 +50,7 @@ def add_member():
     if 'lucky_numbers' not in body:
         return jsonify({'msg': 'El campo lucky_numbers es obligatorio'}), 400
     new_member = {
-                'id': jackson_family._generateId(),
+              
                 'first_name': body['first_name'],
                 'last_name': jackson_family.last_name,
                 'age': body['age'],

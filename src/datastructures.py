@@ -42,6 +42,9 @@ class FamilyStructure:
      return str(uuid.uuid4()) #Alternativa, genra numero random, único e independiente
 
     def add_member(self, member):
+        member.update({"id":member.get("id", self._generateId())})
+       
+      
         self._members.append(member)
         return self._members
 #Itera sobre los miembros chequeando contra el ID, si es distinto, lo agrega a nueva lista
@@ -52,6 +55,7 @@ class FamilyStructure:
     def get_member(self, id):
         for member in self._members:
             if member['id'] == id:
+                   
                 return member
         return None
 
